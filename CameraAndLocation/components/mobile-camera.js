@@ -17,10 +17,15 @@ class MobileCamera extends Component{
     }
 
     render(){
+        console.log('Camera');
+
         return(
             <Camera
-                ref="cam"
-                type={this.state.cameraType}>
+                ref={(cam) => {
+                    this.camera = cam;
+                }}
+                type={this.state.cameraType}
+                aspect={Camera.constants.Aspect.fill}>
                 <View style={styles.buttonBar}>
                     <TouchableHighlight style={styles.button} onPress={() => this.switchCamera()}>
                         <Text style={styles.buttonText}>Flip</Text>
@@ -34,9 +39,7 @@ class MobileCamera extends Component{
     }
 
     switchCamera(){
-        const newCameraType = this.state.cameraType === Camera.constants.Type.back ?
-            Camera.constants.Type.front :
-            Camera.constants.Type.back;
+        const newCameraType = (this.state.cameraType === Camera.constants.Type.back) ? Camera.constants.Type.front : Camera.constants.Type.back;
         this.setState({cameraType: newCameraType});
     }
 
@@ -50,7 +53,7 @@ class MobileCamera extends Component{
 
 function mapStateToProps(state) {
     return {
-
+        cameraDisplayed: state.cameraDisplayed
     };
 }
 
@@ -76,12 +79,11 @@ const styles = StyleSheet.create({
     },
     button: {
         padding: 10,
-        color: "#FFFFFF",
         borderWidth: 1,
         borderColor: "#FFFFFF",
         margin: 5
     },
     buttonText: {
-        color: "#FFFFFF"
+        color: "#777777"
     }
 });

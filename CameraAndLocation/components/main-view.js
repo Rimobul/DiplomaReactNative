@@ -10,11 +10,14 @@ import MobileCamera from './mobile-camera';
 
 class MainView extends Component {
     render() {
+        console.log('MainView', this.props);
+
         if(this.props.cameraDisplayed){
             return (
                 <MobileCamera/>
             );
         } else {
+            console.log('Normal')
             return(
                 <View>
                     <Text>Data: {this.props.pictureData.data}</Text>
