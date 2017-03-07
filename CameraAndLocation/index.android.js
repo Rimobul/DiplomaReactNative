@@ -22,10 +22,10 @@ export default class CameraAndLocation extends Component {
     render() {
         console.log('Index');
         return (
-            <Provider store={createStoreWithMiddleware(reducers)}>
-                <View style={styles.container}>
+            <Provider
+                store={createStoreWithMiddleware(reducers)}
+                style={styles.container}>
                     <MainView />
-                </View>
             </Provider>
         );
     }

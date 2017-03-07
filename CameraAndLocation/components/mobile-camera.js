@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {
+    Button,
     StyleSheet,
     Text,
     View,
@@ -20,6 +21,23 @@ class MobileCamera extends Component{
         console.log('Camera');
 
         return(
+            <View>
+                <Button
+                    title="Flip"
+                    onPress={() => this.switchCamera()}/>
+                <Button
+                    title="Take"
+                    onPress={() => this.takePicture()}/>
+                <Button
+                    title="Back"
+                    onPress={() => this.props.displayCamera(false)}/>
+                <Camera
+                    ref={(cam) => {this.camera = cam;}}
+                    aspect={Camera.constants.Aspect.fill}/>
+            </View>
+        );
+
+        /*return(
             <Camera
                 ref={(cam) => {
                     this.camera = cam;
@@ -35,7 +53,7 @@ class MobileCamera extends Component{
                     </TouchableHighlight>
                 </View>
             </Camera>
-        );
+        );*/
     }
 
     switchCamera(){
@@ -44,7 +62,9 @@ class MobileCamera extends Component{
     }
 
     takePicture() {
-        this.refs.cam.capture((error, data) => {
+        console.log('Taking picture...');
+        this.camera.capture((error, data) => {
+            console.log('Pciture taken', error, data);
            this.props.savePicture(error, data);
            this.props.displayCamera(false);
         });

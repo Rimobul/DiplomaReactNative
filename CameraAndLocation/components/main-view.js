@@ -9,6 +9,29 @@ import {
 import MobileCamera from './mobile-camera';
 
 class MainView extends Component {
+    constructor(props){
+        super(props);
+
+        this.state = {
+            latitude: null,
+            longitude: null,
+            error: null
+        };
+    }
+
+    geolocate(){
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                this.setState({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                })
+            },
+            (error) => this.setState({error: error.message}),
+            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+        );
+    }
+
     render() {
         console.log('MainView', this.props);
 
@@ -21,14 +44,16 @@ class MainView extends Component {
             return(
                 <View>
                     <Text>Data: {this.props.pictureData.data}</Text>
-                    <Text>Error: {this.props.pictureData.error}</Text>
+                    <Text>Camera error: {this.props.pictureData.error}</Text>
                     <Button
                         title="Go to camera"
                         onPress={() => this.props.displayCamera(true)}/>
                     <Button
                         title="Start GPS"
-                        onPress={() => {}}/>
-                    <Text>GPS data:</Text>
+                        onPress={() => this.geolocate()}/>
+                    <Text>Latitude: {this.state.latitude}</Text>
+                    <Text>Longitude: {this.state.longitude}</Text>
+                    <Text>GPS error: {this.state.error}</Text>
                 </View>
             );
         }
