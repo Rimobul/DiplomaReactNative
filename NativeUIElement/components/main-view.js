@@ -21,7 +21,7 @@ export default class MainView extends Component {
                 <Text>Value: {this.state.value}</Text>
                 <Button
                     title="Generate random number"
-                    onPress={SimpleCalculator.random(num => this.setState({value: num}))} />
+                    onPress={() => SimpleCalculator.random(num => this.setState({value: num}))} />
             </View>
         );
     }
