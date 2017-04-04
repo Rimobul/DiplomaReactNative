@@ -17,9 +17,9 @@ RCT_EXPORT_METHOD(random:(RCTResponseSenderBlock)callback)
 {
   // Change this depending on what you want to retrieve:
   int r = arc4random_uniform(100);
-  NSArray *a = @[@(r)];
+  //NSArray *a = @[@(r)];
   
-  callback(@[a]);
+  callback(@[[NSNumber numberWithInt:(r)]]);
 }
 
 @end
