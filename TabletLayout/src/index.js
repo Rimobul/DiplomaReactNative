@@ -62,7 +62,7 @@ const styles = MediaQueryStyleSheet.create({
 	}
 }, {
 	//Smartphone breakpoint:
-	"@media (min-device-width: 320)": {
+	"@media (max-device-width: 599)": {
 		container: {
 			flexDirection: "column"
 		},
